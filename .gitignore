@@ -1,0 +1,6 @@
+/Franco.Api.Monetto/Properties/
+/.idea/
+appsettings.json
+appsettings.Development.json
+bin/
+obj/
