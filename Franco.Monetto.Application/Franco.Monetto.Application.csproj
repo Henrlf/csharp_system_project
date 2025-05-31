@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="Command\" />
+      <Folder Include="Dto\" />
+      <Folder Include="Handler\" />
+      <Folder Include="Queries\" />
+      <Folder Include="Resource\" />
+      <Folder Include="Validator\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Franco.Monetto.Infra\Franco.Monetto.Infra.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="AutoMapper" Version="14.0.0" />
+    </ItemGroup>
+
+</Project>

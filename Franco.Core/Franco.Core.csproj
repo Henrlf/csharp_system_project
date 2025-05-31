@@ -9,20 +9,20 @@
 
     <ItemGroup>
         <PackageReference Include="MediatR" Version="12.4.1" />
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.5" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.3">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.0.1" />
+        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.11.0" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Franco.Domain.Core\Franco.Domain.Core.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
+      <Folder Include="Aggregate\" />
+      <Folder Include="Event\" />
+      <Folder Include="Exception\" />
       <Folder Include="Helper\" />
+      <Folder Include="Service\" />
     </ItemGroup>
 
 </Project>

@@ -1,6 +1,0 @@
-@Franco.Api.Monetto_HostAddress = http://localhost:5211
-
-GET {{Franco.Api.Monetto_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

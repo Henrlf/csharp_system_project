@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="Application\Login\Command\" />
+      <Folder Include="Application\Login\Handler\" />
+      <Folder Include="Application\Login\Query\" />
+      <Folder Include="Dto\" />
+      <Folder Include="Resource\" />
+      <Folder Include="Validator\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Franco.Sentry.Infra\Franco.Sentry.Infra.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="AutoMapper" Version="14.0.0" />
+    </ItemGroup>
+
+</Project>

@@ -1,5 +1,5 @@
-﻿using Franco.Domain.Core.Interfaces;
-using Franco.Domain.Core.ValueObjects.Messaging;
+﻿using Franco.Core.Interface;
+using Franco.Core.ValueObject.Messaging;
 using MediatR;
 
 namespace Franco.Core.Handler;
