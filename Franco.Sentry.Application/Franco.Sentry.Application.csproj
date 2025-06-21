@@ -7,12 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Application\Login\Command\" />
-      <Folder Include="Application\Login\Handler\" />
-      <Folder Include="Application\Login\Query\" />
-      <Folder Include="Dto\" />
       <Folder Include="Resource\" />
-      <Folder Include="Validator\" />
     </ItemGroup>
 
     <ItemGroup>
@@ -21,6 +16,7 @@
 
     <ItemGroup>
       <PackageReference Include="AutoMapper" Version="14.0.0" />
+      <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     </ItemGroup>
 
 </Project>

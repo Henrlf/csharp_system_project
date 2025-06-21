@@ -8,9 +8,9 @@ namespace Franco.Sentry.Infra.Context;
 
 public sealed class SentryContext : DbContext
 {
-    private readonly IMediator _mediatorHandler;
-
     public DbSet<User> User {get; set;}
+    
+    private readonly IMediator _mediatorHandler;
     
     public SentryContext(DbContextOptions<SentryContext> options, IMediator mediatorHandler) : base(options)
     {

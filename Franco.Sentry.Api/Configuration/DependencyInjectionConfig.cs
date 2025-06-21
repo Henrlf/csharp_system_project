@@ -1,6 +1,12 @@
-﻿using Franco.Core.Handler;
+﻿using Franco.Core.Dto.Messaging;
+using Franco.Core.Handler;
 using Franco.Core.Interface;
 using Franco.CrossCutting.IoC;
+using Franco.Sentry.Application.Auth.Handler;
+using Franco.Sentry.Application.Auth.Query;
+using Franco.Sentry.Application.Auth.Service;
+using Franco.Sentry.Application.Auth.Validation;
+using FluentValidation;
 using MediatR;
 
 namespace Franco.Sentry.Api.Configuration;
@@ -11,57 +17,45 @@ public static class DependencyInjectionConfig
     {
         ArgumentNullException.ThrowIfNull(services);
 
-        ApiInjections(services, configuration);
-        ApplicationInjections(services, configuration);
-        // RegisterLocalization(services, configuration);
+        RegisterApiInjection(services);
+        RegisterQueryInjection(services);
+        RegisterCommandInjection(services);
+        RegisterValidationInjection(services);
+        RegisterServiceInjection(services);
 
         NativeInjector.RegisterWebServices(services, configuration);
         NativeInjector.RegisterCustomServices(services, configuration);
         NativeInjector.RegisterConfigurations(services, configuration);
-        
+
         // ResxConfig.RegisterMapperAndResolvers(services, configuration);
     }
 
     public static void AddDependencyInjectionConfiguration(this IApplicationBuilder app)
     {
         ArgumentNullException.ThrowIfNull(app);
-        // RegisterLocalization(app);
     }
-    
-    private static void ApiInjections(this IServiceCollection services, ConfigurationManager configuration)
+
+    private static void RegisterApiInjection(this IServiceCollection services)
     {
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>());
         services.AddScoped<IMediatorHandler, MediatorHandler>();
     }
 
-    private static void ApplicationInjections(this IServiceCollection services, ConfigurationManager configuration)
+    private static void RegisterQueryInjection(this IServiceCollection services)
     {
+        services.AddScoped<IRequestHandler<UserLoginQuery, BaseResponse>, AuthQueryHandler>();
         // services.AddScoped<IRequestHandler<TokenQuery, RequestResponse>, LoginQueryHandler>();
-        // services.AddScoped<IRequestHandler<LoginCommand, RequestResponse>, LoginCommandHandler>();
-        // services.AddScoped<JwtTokenService>();
     }
 
-    // private static void RegisterLocalization(this IServiceCollection services, ConfigurationManager configuration)
-    // {
-    //     services.AddLocalization();
-    // }
-    
-    // private static void RegisterLocalization(this IApplicationBuilder app)
-    // {
-    //     var supportedCultures = new[]
-    //     {
-    //         new CultureInfo("pt-br"),
-    //         new CultureInfo("es-ar"),
-    //         new CultureInfo("es-bo"),
-    //         new CultureInfo("es-mx"),
-    //         new CultureInfo("es-py"),
-    //         new CultureInfo("en-us"),
-    //     };
-    //
-    //     app.UseRequestLocalization(new RequestLocalizationOptions
-    //     {
-    //         SupportedCultures = supportedCultures,
-    //         SupportedUICultures = supportedCultures
-    //     });
-    // }
+    private static void RegisterCommandInjection(this IServiceCollection services) {}
+
+    private static void RegisterValidationInjection(this IServiceCollection services)
+    {
+        services.AddTransient<IValidator<UserLoginQuery>, UserLoginValidation>();
+    }
+
+    private static void RegisterServiceInjection(this IServiceCollection services)
+    {
+        services.AddScoped<JwtService>();
+    }
 }

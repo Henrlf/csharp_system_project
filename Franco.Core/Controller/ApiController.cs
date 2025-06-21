@@ -1,10 +1,11 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Franco.Core.Controller;
 
-public class ControllerApi : ControllerBase
+public class ApiController : ControllerBase
 {
     private readonly List<string> _errors = [];
 
@@ -59,7 +60,7 @@ public class ControllerApi : ControllerBase
             throw new Exception("Não sei o que fazer ainda");
         }
 
-        return customer.Value.ToString();
+        return customer.Value;
     }
 
     protected string GetKeyFromJwt(string key)
@@ -70,9 +71,8 @@ public class ControllerApi : ControllerBase
 
         authHeader = authHeader.Replace("Bearer ", "");
 
-        var jsonToken = handler.ReadToken(authHeader);
-        var tokenS = handler.ReadToken(authHeader) as JwtSecurityToken;
+        var token = handler.ReadToken(authHeader) as JwtSecurityToken;
 
-        return tokenS.Claims.First(claim => claim.Type == key).Value;
+        return token.Claims.First(claim => claim.Type == key).Value;
     }
 }

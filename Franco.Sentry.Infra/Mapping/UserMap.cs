@@ -12,14 +12,8 @@ public class UserMap : IEntityTypeConfiguration<User>
 
         builder.HasKey(c => c.Id);
 
-        builder.Property(c => c.Identifier)
-            .HasColumnType("integer")
-            .IsRequired();
-
         builder.Property(c => c.Username)
             .HasColumnType("text")
             .IsRequired();
-
-        builder.HasIndex(c => c.Identifier).IsUnique();
     }
 }
