@@ -11,4 +11,8 @@
       <ProjectReference Include="..\Franco.Core.Infra\Franco.Core.Infra.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Migrations\" />
+    </ItemGroup>
+
 </Project>

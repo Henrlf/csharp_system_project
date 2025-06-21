@@ -13,12 +13,12 @@ public class MediatorHandler : IMediatorHandler
         _mediator = mediator;
     }
     
-    public Task<TR> SendCommand<TR, T>(T command, CancellationToken cancellationToken) where TR : BaseResponse where T : IRequest<TR>
+    public Task<TR> SendCommand<TR, T>(T command, CancellationToken cancellationToken) where TR : Response where T : IRequest<TR>
     {
         return _mediator.Send(command, cancellationToken);
     }
 
-    public async Task<TR> SendQuery<TR, T>(T query, CancellationToken cancellationToken) where TR : BaseResponse where T : IRequest<TR>
+    public async Task<TR> SendQuery<TR, T>(T query, CancellationToken cancellationToken) where TR : Response where T : IRequest<TR>
     {
         return await _mediator.Send(query, cancellationToken);
     }

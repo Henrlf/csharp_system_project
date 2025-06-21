@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Franco.Sentry.Application.Auth.Query;
 
-public class UserLoginQuery : IRequest<BaseResponse>
+public class UserLoginQuery : IRequest<Response>
 {
     [JsonPropertyName("usarname")]
     public string Username {get; set;} = string.Empty;

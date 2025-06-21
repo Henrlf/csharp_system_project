@@ -12,6 +12,24 @@ namespace Franco.CrossCutting.IoC;
 
 public static class NativeInjector
 {
+    public static void RegisterConfigurations(IServiceCollection services, IConfigurationManager configuration)
+    {
+        ArgumentNullException.ThrowIfNull(services);
+
+        services.AddDatabaseSentryConfiguration(configuration);
+    }
+    
+    public static void RegisterCustomServices(IServiceCollection services, ConfigurationManager configuration)
+    {
+        ArgumentNullException.ThrowIfNull(services);
+
+        // services.AddMemoryCache();
+
+        // SERVICES
+        // services.AddExternalServiceConfiguration(configuration);
+        // services.AddInternalServiceConfiguration(configuration);
+    }
+    
     public static void RegisterWebServices(IServiceCollection services, IConfigurationManager configuration)
     {
         ArgumentNullException.ThrowIfNull(services);
@@ -92,23 +110,5 @@ public static class NativeInjector
         #endregion
 
         services.AddHttpContextAccessor();
-    }
-
-    public static void RegisterCustomServices(IServiceCollection services, ConfigurationManager configuration)
-    {
-        ArgumentNullException.ThrowIfNull(services);
-
-        // services.AddMemoryCache();
-
-        // SERVICES
-        // services.AddExternalServiceConfiguration(configuration);
-        // services.AddInternalServiceConfiguration(configuration);
-    }
-
-    public static void RegisterConfigurations(IServiceCollection services, IConfigurationManager configuration)
-    {
-        ArgumentNullException.ThrowIfNull(services);
-
-        services.AddDatabaseSentryConfiguration(configuration);
     }
 }

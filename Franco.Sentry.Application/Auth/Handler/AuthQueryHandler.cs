@@ -9,7 +9,7 @@ using MediatR;
 
 namespace Franco.Sentry.Application.Auth.Handler;
 
-public class AuthQueryHandler : IRequestHandler<UserLoginQuery, BaseResponse>
+public class AuthQueryHandler : IRequestHandler<UserLoginQuery, Response>
 {
     private readonly IValidator<UserLoginQuery> _userLoginValidator;
     private readonly UserRepository _userRepository;
@@ -22,13 +22,14 @@ public class AuthQueryHandler : IRequestHandler<UserLoginQuery, BaseResponse>
         _jwtTokenService = jwtTokenService;
     }
 
-    public async Task<BaseResponse> Handle(UserLoginQuery query, CancellationToken cancellationToken)
+    // VERIFICA LOGIN E GERA TOKEN
+    public async Task<Response> Handle(UserLoginQuery query, CancellationToken cancellationToken)
     {
         var result = await _userLoginValidator.ValidateAsync(query, cancellationToken);
 
         if (!result.IsValid)
         {
-            return new BaseResponse()
+            return new Response()
             {
                 Success = false,
                 Code = HttpCodeEnum.INVALID_DATA,
@@ -41,7 +42,7 @@ public class AuthQueryHandler : IRequestHandler<UserLoginQuery, BaseResponse>
 
         if (user is null || !BCrypt.Net.BCrypt.Verify(query.Password, user.Password))
         {
-            return new BaseResponse()
+            return new Response()
             {
                 Success = false,
                 Code = HttpCodeEnum.DATA_NOT_FINDED,
@@ -55,7 +56,7 @@ public class AuthQueryHandler : IRequestHandler<UserLoginQuery, BaseResponse>
             Name = user.Username
         });
 
-        return new BaseResponse
+        return new Response
         {
             Message = "Login successful",
             Data = token

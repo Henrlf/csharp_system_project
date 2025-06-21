@@ -12,8 +12,42 @@ public class UserMap : IEntityTypeConfiguration<User>
 
         builder.HasKey(c => c.Id);
 
+        builder.Property(c => c.Id)
+            .HasColumnName("id");
+            
         builder.Property(c => c.Username)
+            .HasColumnName("username")
+            .HasColumnType("varchar(255)")
+            .IsRequired();
+        
+        builder.Property(c => c.Password)
+            .HasColumnName("password")
             .HasColumnType("text")
+            .IsRequired();
+        
+        builder.Property(c => c.Email)
+            .HasColumnName("email")
+            .HasColumnType("varchar(255)")
+            .IsRequired();
+        
+        builder.Property(c => c.Document)
+            .HasColumnName("document")
+            .HasColumnType("varchar(20)")
+            .IsRequired();
+        
+        builder.Property(c => c.Phone)
+            .HasColumnName("phone")
+            .HasColumnType("varchar(25)")
+            .IsRequired();
+        
+        builder.Property(c => c.Status)
+            .HasColumnName("statu")
+            .HasColumnType("boolean")
+            .IsRequired();
+        
+        builder.Property(c => c.CreatedAt)
+            .HasColumnName("createdAt")
+            .HasColumnType("timestamp")
             .IsRequired();
     }
 }

@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Franco.Core.Dto.Messaging;
+using Franco.Core.Infra.Extension;
 using Franco.Sentry.Domain.Model;
 using Franco.Sentry.Infra.Mapping;
 using MediatR;
@@ -24,7 +26,7 @@ public sealed class SentryContext : DbContext
     {
         modelBuilder.UsePropertyAccessMode(PropertyAccessMode.Field);
         modelBuilder.Ignore<ValidationResult>();
-        // modelBuilder.Ignore<Event>();
+        modelBuilder.Ignore<Event>();
 
         foreach (var property in modelBuilder.Model
                      .GetEntityTypes()
@@ -42,11 +44,10 @@ public sealed class SentryContext : DbContext
     {
         var success = await SaveChangesAsync(cancellationToken) > 0;
 
-        // TODO: FINALIZAR!!!
-        // if (success)
-        // {
-        //     await _mediatorHandler.PublishDomainEvents(this, cancellationToken);
-        // }
+        if (success)
+        {
+            await _mediatorHandler.PublishDomainEvents(this, cancellationToken);
+        }
 
         return success;
     }

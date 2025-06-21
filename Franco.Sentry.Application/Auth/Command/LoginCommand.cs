@@ -3,4 +3,4 @@ using MediatR;
 
 namespace Franco.Sentry.Application.Auth.Command;
 
-public class LoginCommand : IRequest<BaseResponse> {}
+public class LoginCommand : IRequest<Response> {}

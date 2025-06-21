@@ -1,13 +1,12 @@
 using Franco.CrossCutting.IoC.Configuration;
 using Franco.Sentry.Api.Configuration;
-// using Franco.CrossCutting.IoC.Configurations;
 
 var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development";
 var port = Environment.GetEnvironmentVariable("APP_PORT") ?? "5186";
 // var machineName = Environment.MachineName;
 
 Console.WriteLine($"ASPNETCORE_ENVIRONMENT: {environment}");
-Console.WriteLine($"APP_PORT: {port}");
+// Console.WriteLine($"APP_PORT: {port}");
 // Console.WriteLine($"MACHINE_NAME: {machineName}");
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,13 +27,13 @@ builder.Services.AddDependencyInjectionConfiguration(builder.Configuration);
 
 var app = builder.Build();
 
+app.AddDependencyInjectionConfiguration();
+app.AddDatabaseSentryConfiguration();
+
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
-
-app.AddDependencyInjectionConfiguration();
-app.AddDatabaseSentryConfiguration();
 
 app.UseSwagger();
 app.UseSwaggerUI();
@@ -47,4 +46,5 @@ app.MapControllers();
 app.MapHealthChecks("/healthz");
 
 app.Run($"http://*:{port}");
+// app.Run();
 

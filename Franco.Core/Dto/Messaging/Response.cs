@@ -3,7 +3,7 @@ using Franco.Core.Enum;
 
 namespace Franco.Core.Dto.Messaging;
 
-public record BaseResponse()
+public record Response()
 {
     [JsonPropertyName("success")]
     public bool Success {get; set;} = true;
